@@ -1,2 +1,5 @@
 # GITP_Tcl
-Scripts to generate VHDL instantiation and testbench templates from VHDL entities
+This repository holds two Tcl scripts for Xilinx Vivado:
+* get_instantiation_template.tcl: generates VHDL instantiation templates from an entity in a .vhd source file.
+* get_testbench_template.tcl: generates VHDL testbench skeleton from an entity in a .vhd source file.
+Such scripts to Vivado a set of features that were not included by Xilinx explicitly.
