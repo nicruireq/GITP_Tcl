@@ -1,5 +1,8 @@
-# Object file
-*.o
+# vhd files
+*.vhd
+*.vho
 
-# Ada Library Information
-*.ali
+# other
+parser.tcl
+readfile.tcl
+test.tcl
