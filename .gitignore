@@ -6,3 +6,4 @@
 parser.tcl
 readfile.tcl
 test.tcl
+*.html

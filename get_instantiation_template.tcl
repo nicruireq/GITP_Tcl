@@ -30,7 +30,7 @@ namespace eval ::instantiationtemplate {
 	
 	# holds string with the entity
 	variable entity
-	# holds string with then entity name
+	# holds string with the entity name
 	variable entity_name
 	# string where is formated the component
 	variable tp_component
@@ -326,7 +326,7 @@ if {[catch {
 	error " Error - check VHDL source files syntax: $rtl_error "
 }
 
-puts "SELECCIONADO: $selected_vhd"
+puts "SELECTED: $selected_vhd"
 #	call to main command and gets the returned directory
 set outputtp [::instantiationtemplate::get_instantiation_template \
 				$selected_vhd [file dirname $selected_vhd]
