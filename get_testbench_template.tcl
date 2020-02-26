@@ -35,7 +35,8 @@ namespace eval testbenchtemplate {
 	variable entity
 	# holds string with the entity name
 	variable entity_name
-
+    # string where is formated the component
+	variable tp_component
 }
 
 
@@ -95,6 +96,35 @@ proc ::testbenchtemplate::extract_entity {data} {
 	return $ret_ent
 }
 
+#
+#	Generates the component template
+#
+#	ent : a string with the entity's representation
+#
+#	if it hasn't been to possible generate the template
+#	returns 0, else returns 1
+#	the component template is stored in the namespace
+#	variable 'tp_component'
+#
+proc ::testbenchtemplate::generate_component {ent} {
+	# variables to be used in this proc
+	variable tp_component
+	
+	# replace 'entity' by 'component'
+	set num_subs [regsub -nocase -- {^entity} \
+					$ent "component" tp_aux \
+	]
+	if {$num_subs} {
+		# replace 'end entity_name;' by 'end component;'
+		set num_subs [regsub -nocase -- \
+						{end\s+([A-Za-z0-9_]+\s*);} \
+						$tp_aux {end component;} tp_component \
+		]
+	}
+	
+	return $num_subs
+}
+
 
 # TEST
 set fexample [open {./examples/FFD.vhd} "r"]
@@ -108,6 +138,9 @@ puts "----------------------------------------------------\n"
 set ret2 [::testbenchtemplate::clock_exists $text]
 puts "Tiene reloj?: $ret2"
 
-#puts "CODIGO:\n$text"
-#set ret2 [regexp -nocase -- {rising_edge\([A-Za-z0-9_]+\)} $text]
-#puts "resultado expresion: $ret2"
+puts "----------------------------------------------------\n"
+set comp [::testbenchtemplate::generate_component $::testbenchtemplate::entity]
+puts "component:\n"
+puts "Resultado: $comp"
+puts $::testbenchtemplate::tp_component
+
